@@ -1,7 +1,7 @@
 /*
   settings.ino - user settings for Sonoff-Tasmota
 
-  Copyright (C) 2018  Theo Arends
+  Copyright (C) 2019  Theo Arends
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -865,6 +865,10 @@ void SettingsDelta(void)
       if (Settings.sleep < 50) {
         Settings.sleep = 50;                // Default to 50 for sleep, for now
       }
+    }
+    if (Settings.version < 0x06040105) {
+      Settings.flag3.mdns_enabled = 0;
+      Settings.param[P_MDNS_DELAYED_START] = 0;
     }
 
     Settings.version = VERSION;
